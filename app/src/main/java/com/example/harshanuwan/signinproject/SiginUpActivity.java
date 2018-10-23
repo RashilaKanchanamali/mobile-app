@@ -17,6 +17,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 public class SiginUpActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -24,20 +28,21 @@ public class SiginUpActivity extends AppCompatActivity implements View.OnClickLi
     Button bSignup;
     //initialize variables
     private FirebaseAuth mAuth;
+    private DatabaseReference storeUserDefaltDataReference;
 
     private ProgressDialog loadingBar;
-    //private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sigin_up);
-        mAuth = FirebaseAuth.getInstance();//Connect firebasee
+        mAuth = FirebaseAuth.getInstance();//Connect firebase
 
-        //mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
-        //setSupportActionBar(mToolbar);
-        //getSupportActionBar().setTitle("Sign Up");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //setup toolbar with name of this intent and back arrow
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.sign_in_toolbar);
+        setSupportActionBar(mToolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Sign Up");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etFirstname = (EditText) findViewById(R.id.etFirstname);
         etLastname = (EditText) findViewById(R.id.etLastname);
@@ -54,11 +59,11 @@ public class SiginUpActivity extends AppCompatActivity implements View.OnClickLi
 
                 String firstName =etFirstname.getText().toString();
                 String lastName =etLastname.getText().toString();
-                String username =etUsername.getText().toString();
+                final String username =etUsername.getText().toString();
                 String email =etEmail.getText().toString();
                 String password =etPassword.getText().toString();
                 String vpassword =etVpassword.getText().toString();
-                //Toast.makeText(SiginUpActivity.this, "clicked button Action listner", Toast.LENGTH_SHORT).show();
+
                 registerUser();
             }
         });
@@ -67,7 +72,7 @@ public class SiginUpActivity extends AppCompatActivity implements View.OnClickLi
         private void registerUser(){
         String firstName = etFirstname.getText().toString().trim();
         String lastName = etLastname.getText().toString().trim();
-        String userName = etUsername.getText().toString().trim();
+        final String userName = etUsername.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
         String vpassword = etVpassword.getText().toString().trim();
@@ -102,10 +107,28 @@ public class SiginUpActivity extends AppCompatActivity implements View.OnClickLi
                 if (task.isSuccessful()){
                     Toast.makeText(getApplicationContext(),"Registered successfull", Toast.LENGTH_SHORT).show();
 
-                    Intent mainIntent = new Intent(SiginUpActivity.this,MainPageActivity.class);
-                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(mainIntent);
-                    finish();
+                    String current_user_id = mAuth.getCurrentUser().getUid ();
+                    storeUserDefaltDataReference = FirebaseDatabase.getInstance().getReference().child("Users").child(current_user_id);//create reference and store inside storeUserDefaltDataReference
+                                                                                                                   //pass the uid to users
+
+                    //set values to database
+                    storeUserDefaltDataReference.child("user_name").setValue(userName);
+                    storeUserDefaltDataReference.child("user_image").setValue("defalte_profile");
+                    storeUserDefaltDataReference.child("user_thumb_image").setValue("default_image")
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        Intent mainIntent = new Intent(SiginUpActivity.this,MainPageActivity.class);
+                                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(mainIntent);
+                                        finish();
+                                    }
+
+                                }
+                            });
+
+
                 }
                 else {
                     Toast.makeText(SiginUpActivity.this,"Something wrong, Try again...",

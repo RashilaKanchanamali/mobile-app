@@ -15,16 +15,17 @@ import android.widget.Toolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 import static com.example.harshanuwan.signinproject.R.menu.main_menu;
 
 public class MainPageActivity extends AppCompatActivity {
 
-    private android.support.v7.widget.Toolbar mToolbar;
     private FirebaseAuth mAuth;
 
-    private ViewPager mainViewPager;
-    private TabLayout mainTabLayout;
-    private TabspagerAdapter mainTabsPagerAdapter;
+    private ViewPager mFragmentpager;//fragments working area
+    private TabLayout mFragmentstab;//include only fragments names
+    private TabspagerAdapter mTabsPagerAdapter;
 
 
     @Override
@@ -34,17 +35,18 @@ public class MainPageActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        //MainPageActivity tabs
-        mToolbar =(android.support.v7.widget.Toolbar) findViewById(R.id.app_bar);
+        //add fragments
+        mFragmentpager = (ViewPager) findViewById(R.id.fragments_pager);
+        mTabsPagerAdapter = new TabspagerAdapter(getSupportFragmentManager());
+        mFragmentpager.setAdapter(mTabsPagerAdapter);
+        mFragmentstab = (TabLayout) findViewById(R.id.fragments_tab);
+        mFragmentstab.setupWithViewPager(mFragmentpager);
+
+        //add toolbar with intent name and back arrow
+        android.support.v7.widget.Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("mobi Chat");
-
-       //mainViewPager = findViewById(R.id.main_tab_pager);
-        mainTabsPagerAdapter = new TabspagerAdapter(getSupportFragmentManager());
-        mainViewPager.setAdapter(mainTabsPagerAdapter);
-       //mainTabLayout = (TabLayout) findViewById(R.id.main_tabs);
-        mainTabLayout.setupWithViewPager(mainViewPager);
-
+        Objects.requireNonNull(getSupportActionBar()).setTitle("mobi Chat");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -55,13 +57,8 @@ public class MainPageActivity extends AppCompatActivity {
 
         if(currentUser == null)
         {
-             SendUserToLoginActivity();
+             LogOutUser();
         }
-    }
-
-    private void SendUserToLoginActivity() {
-        Intent loginIntent = new Intent(MainPageActivity.this,LoginActivity.class);
-        startActivity(loginIntent);
     }
 
     private void LogOutUser() {
@@ -72,12 +69,10 @@ public class MainPageActivity extends AppCompatActivity {
         finish();
     }
 
-    private void sendUserToLoginActivity() {
-    }
 
-    @Override
+    @Override //create main menu three dots
     public boolean onCreateOptionsMenu(Menu menu) {
-//        super.onCreateOptionsMenu(menu);
+        super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main_menu, menu);
 
         return true;
@@ -85,19 +80,17 @@ public class MainPageActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.settings_button:{
-                break;
-            }
+        super.onOptionsItemSelected(item);
 
-
-            case R.id.logout_button:{
-                break;
-            }
-
-
+        if(item.getItemId() == R.id.logout_button){ //work on logout button
+            mAuth.signOut();
+            LogOutUser();
         }
-        return false;
+
+        if (item.getItemId() ==(R.id.settings_button)){ //work on settings activity
+            Intent intentSettings = new Intent(MainPageActivity.this, SettingsActivity.class);
+            startActivity(intentSettings);
+        }
+        return true;
     }
 }

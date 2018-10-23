@@ -20,13 +20,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Toolbar mToolbar;
+    private Toolbar toolbar2;
     private FirebaseAuth mAuth;
     private EditText etUsername;
     private EditText etPassword;
     private Button bLogin;
     private EditText vtRegisterLink;
     private ProgressDialog loadingBar;
+    private Toolbar mtoolbar;
 
 
     @Override
@@ -36,12 +37,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance();
 
-       // mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
-        setSupportActionBar(mToolbar);
-        //getSupportActionBar().setTitle("Log In");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         findViewById(R.id.tvRegisterLink).setOnClickListener(this);
+
+        mtoolbar = (Toolbar) findViewById(R.id.login_toolbar);
+        setSupportActionBar(mtoolbar);
+        getSupportActionBar().setTitle("Log In");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         final EditText etUsername = (EditText) findViewById(R.id.etUsername);

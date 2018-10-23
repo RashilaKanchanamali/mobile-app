@@ -8,9 +8,11 @@
     android:background="@drawable/gradiant_background"
     tools:context=".SiginUpActivity">
 
-    //include layout="@layout/application_bar_layout"
-    //android:id="@+id/sign_in_toolbar"
-    //include
+    <include
+        android:id="@+id/sign_in_toolbar"
+        layout="@layout/application_bar_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etLastname"
@@ -113,16 +115,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUsername" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="85dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/log" />
 
 </android.support.constraint.ConstraintLayout>
