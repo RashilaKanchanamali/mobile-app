@@ -14,14 +14,13 @@ class TabspagerAdapter extends FragmentPagerAdapter{
         switch (position){
 
             case 0:
-                RequestsFragment requestsFragment = new RequestsFragment();
-                return requestsFragment;
-            case 1:
                 ChatFragment chatFragment = new ChatFragment();
                 return chatFragment;
-            case 2:
+
+            case 1:
                 ContactsFregment contactsFregment = new ContactsFregment();
                 return contactsFregment;
+
             default:
                 return null;
 
@@ -32,7 +31,7 @@ class TabspagerAdapter extends FragmentPagerAdapter{
     @Override
     public int getCount() {
 
-        return 3;
+        return 2;
     }
 
     public CharSequence getPageTitle(int position){
@@ -43,8 +42,6 @@ class TabspagerAdapter extends FragmentPagerAdapter{
             case 1:
                 return "Contacts";
 
-            case 2:
-                return "Requests";
 
             default:
                 return null;

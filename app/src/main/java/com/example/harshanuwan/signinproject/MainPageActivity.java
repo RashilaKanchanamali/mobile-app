@@ -91,6 +91,7 @@ public class MainPageActivity extends AppCompatActivity {
             Intent intentSettings = new Intent(MainPageActivity.this, SettingsActivity.class);
             startActivity(intentSettings);
         }
+
         return true;
     }
 }

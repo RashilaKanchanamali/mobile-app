@@ -29,6 +29,12 @@ public class SiginUpActivity extends AppCompatActivity implements View.OnClickLi
     //initialize variables
     private FirebaseAuth mAuth;
     private DatabaseReference storeUserDefaltDataReference;
+    String firstName;
+    String lastName;
+    String userName ;
+    String email;
+    String password;
+    String vpassword;
 
     private ProgressDialog loadingBar;
 
@@ -57,25 +63,18 @@ public class SiginUpActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(View v) {
 
-                String firstName =etFirstname.getText().toString();
-                String lastName =etLastname.getText().toString();
-                final String username =etUsername.getText().toString();
-                String email =etEmail.getText().toString();
-                String password =etPassword.getText().toString();
-                String vpassword =etVpassword.getText().toString();
-
                 registerUser();
             }
         });
     }
 
         private void registerUser(){
-        String firstName = etFirstname.getText().toString().trim();
-        String lastName = etLastname.getText().toString().trim();
-        final String userName = etUsername.getText().toString().trim();
-        String email = etEmail.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
-        String vpassword = etVpassword.getText().toString().trim();
+            firstName = etFirstname.getText().toString().trim();
+            lastName = etLastname.getText().toString().trim();
+            userName = etUsername.getText().toString().trim();
+            email = etEmail.getText().toString().trim();
+            password = etPassword.getText().toString().trim();
+            vpassword = etVpassword.getText().toString().trim();
 
         if(email.isEmpty() || password.isEmpty() || userName.isEmpty() || vpassword.isEmpty()){
             Toast.makeText(SiginUpActivity.this,"Fill black textviews",Toast.LENGTH_SHORT).show();
@@ -112,6 +111,7 @@ public class SiginUpActivity extends AppCompatActivity implements View.OnClickLi
                                                                                                                    //pass the uid to users
 
                     //set values to database
+                    storeUserDefaltDataReference.child("user_id").setValue(current_user_id);
                     storeUserDefaltDataReference.child("user_name").setValue(userName);
                     storeUserDefaltDataReference.child("user_image").setValue("defalte_profile");
                     storeUserDefaltDataReference.child("user_thumb_image").setValue("default_image")
