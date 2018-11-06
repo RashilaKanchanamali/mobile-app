@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class User {
     public String user_id;
     public String user_name;
+    //public String ImageURL;
 
     public User(){
 
@@ -12,6 +13,7 @@ public class User {
     public User(String user_id, String user_name) {
         this.user_id = user_id;
         this.user_name = user_name;
+        //this.ImageURL = ImageURL;
     }
 
     public String getUser_id() {
@@ -29,4 +31,8 @@ public class User {
     public void setUser_name(String user_name) {
         this.user_name = user_name;
     }
+
+    //public String getImageURL() { return ImageURL; }
+
+    //public void setImageURL(String imageURL) { ImageURL = imageURL; }
 }

@@ -46,7 +46,6 @@ public class MainPageActivity extends AppCompatActivity {
         android.support.v7.widget.Toolbar mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(mToolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("mobi Chat");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

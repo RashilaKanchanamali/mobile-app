@@ -48,10 +48,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         final User user = mUsers.get(position);
         holder.username.setText(user.getUser_name());
 
-        //if (user.getImageId().equals("default")){
-        //    holder.all_users_profile_image.setImageResource(R.drawable.person);
+        //if (user.getImageURL().equals("default")){
+            //holder.all_users_profile_image.setImageResource(R.drawable.person);
         //} else {
-//            Glide.with(mContext).load(user.getImageURL()).into(holder.all_users_profile_image);
+            //Glide.with(mContext).load(user.getImageURL()).into(holder.all_users_profile_image);
         //}
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
