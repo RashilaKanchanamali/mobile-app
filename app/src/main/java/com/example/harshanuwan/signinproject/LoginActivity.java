@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText vtRegisterLink;
     private ProgressDialog loadingBar;
     private Toolbar mtoolbar;
+    private TextView forgot_password;
 
 
     @Override
@@ -49,7 +50,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
         final TextView RegisterLink = (TextView) findViewById(R.id.tvRegisterLink);
         final Button bLogin = (Button) findViewById(R.id.bLogin);
+        forgot_password = findViewById(R.id.forgot_password);
         loadingBar = new ProgressDialog(this);
+
+        forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+            }
+        });
 
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override

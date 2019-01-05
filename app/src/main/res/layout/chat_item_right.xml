@@ -16,9 +16,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/profile_image"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
+
             android:id="@+id/show_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +29,7 @@
             android:padding="8dp"
             android:text="hello"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"/>
 
 
     </RelativeLayout>
