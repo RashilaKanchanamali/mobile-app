@@ -148,36 +148,32 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("message", message);
 
         reference.child("Chat").push().setValue(hashMap);
-        Log.i("grfdrfedscrefds","3");
+
     }
 
     private void readMessage(final String myid, final String userid){
         mchat = new ArrayList<>();
 
         reference = FirebaseDatabase.getInstance().getReference("Chat");
-        Log.i("grfdrfedscrefds","1");
+
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.i("grfdrfedscrefds","7");
+
                 mchat.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Log.i("grfdrfedscrefds","8");
+
                     Chat chat = snapshot.getValue(Chat.class);
-                    Log.i("grfdrfedscrefds","receiver id"+chat.getReceiver());
+
                     if (chat.getReceiver().equals(myid) && chat.getSender().equals(userid) ||
                             chat.getReceiver().equals(userid) && chat.getSender().equals(myid)) {
-
-                        Log.i("grfdrfedscrefds","8");
 
                         mchat.add(chat);
                     }
 
-                    Log.i("grfdrfedscrefds","4");
                     messageAdapter =new MessageAdapter(MessageActivity.this, mchat);
                     recyclerView.setAdapter(messageAdapter);
-                    Log.i("grfdrfedscrefds","5");
-                }
+                    }
             }
 
             @Override

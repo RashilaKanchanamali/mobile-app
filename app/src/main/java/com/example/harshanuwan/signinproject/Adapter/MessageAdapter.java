@@ -52,8 +52,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         Chat message = mAllmessages.get(position);
 
-
-
         holder.show_message.setText(message.getMessage());
     }
 

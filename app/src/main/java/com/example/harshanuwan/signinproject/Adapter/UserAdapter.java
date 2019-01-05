@@ -24,10 +24,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private Context mContext;
     private List<User> mUsers;
 
-   //public UserAdapter(Context mContext, List<User> mUsers){
-        //this.mUsers =mUsers;
-        //this.mContext =mContext;
-    //}
 
     public UserAdapter(Context mContext, List<User> mUsers) {
         this.mUsers =mUsers;

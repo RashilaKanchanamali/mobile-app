@@ -5,5 +5,8 @@
     <color name="colorAccent">#012e03</color>
     <color name="primaryColor">#500057</color>
     <color name="titleColor">#0808af</color>
-    <color name="purple">#9e18cf</color>
+    <color name="purple">#d99eef</color>
+    <color name="green">#135309</color>
+    <color name="black">#000000</color>
+    <color name="lowgreen">#80e670</color>
 </resources>

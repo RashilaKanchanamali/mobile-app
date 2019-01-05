@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         else {
             loadingBar.setTitle("Login Account");
-            loadingBar.setMessage("Creating account");
+            loadingBar.setMessage("Please wait until Login...");
             loadingBar.show();
 
             mAuth.signInWithEmailAndPassword(email,password)
