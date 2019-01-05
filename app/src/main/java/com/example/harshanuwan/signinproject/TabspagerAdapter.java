@@ -18,8 +18,8 @@ class TabspagerAdapter extends FragmentPagerAdapter{
                 return chatFragment;
 
             case 1:
-                ContactsFregment contactsFregment = new ContactsFregment();
-                return contactsFregment;
+                ContactsFragment contactsFragment = new ContactsFragment();
+                return contactsFragment;
 
             default:
                 return null;

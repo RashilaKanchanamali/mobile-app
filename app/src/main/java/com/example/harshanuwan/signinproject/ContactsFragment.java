@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContactsFregment extends Fragment {
+public class ContactsFragment extends Fragment {
     private View ContactsView;
     private RecyclerView contactsList;
     private UserAdapter userAdapter;
@@ -34,7 +34,7 @@ public class ContactsFregment extends Fragment {
     private FirebaseAuth mAuth;
 
 
-    public ContactsFregment() {
+    public ContactsFragment() {
         // Required empty public constructor
     }
 
@@ -43,7 +43,7 @@ public class ContactsFregment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ContactsView = inflater.inflate(R.layout.fregment_contacts, container, false);
+        ContactsView = inflater.inflate(R.layout.fragment_contacts, container, false);
 
         //contactsList = (RecyclerView) ContactsView.findViewById(R.id.contact_list);
         //contactsList.setLayoutManager(new LinearLayoutManager(getContext()));

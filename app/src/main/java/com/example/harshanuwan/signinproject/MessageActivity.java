@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.harshanuwan.signinproject.Adapter.MessageAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +39,8 @@ public class MessageActivity extends AppCompatActivity {
     ImageButton btn_send;
     EditText text_send;
 
+    MessageAdapter messageAdapter;
+
     Intent intent;
 
 
@@ -48,7 +51,7 @@ public class MessageActivity extends AppCompatActivity {
 
         Toolbar application_bar_layout = findViewById(R.id.toolbar2);
         setSupportActionBar(application_bar_layout);
-        getSupportActionBar().setTitle("");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         application_bar_layout.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +68,9 @@ public class MessageActivity extends AppCompatActivity {
 
         intent = getIntent();
         final String user_id =intent.getStringExtra("user_id");
+        final String user_name =intent.getStringExtra("user_name");
 
+        getSupportActionBar().setTitle(user_name);
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,13 +91,18 @@ public class MessageActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User username = dataSnapshot.getValue(User.class);
+
+                User uservalue = dataSnapshot.getValue(User.class);
+
+                mUsers.add(user);
                 //user_name.setText(username.getUser_name());
                 //if (user_name.getImageURL().equals("default")){
                     //profileImage.setImageResource(R.drawable.person);
                 //}else {
                     //Glide.with(MessageActivity.this).load(profileImage.getImageURL()).into(all_users_profile_image);
                 }
+            messageAdapter = new MessageAdapter(this, mUsers);
+                contactsList.setAdapter(userAdapter);
 
             //}
 
