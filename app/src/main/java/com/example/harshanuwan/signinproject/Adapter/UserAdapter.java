@@ -24,7 +24,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private Context mContext;
     private List<User> mUsers;
 
-   // public UserAdapter(Context mContext, List<User> mUsers){
+   //public UserAdapter(Context mContext, List<User> mUsers){
         //this.mUsers =mUsers;
         //this.mContext =mContext;
     //}
@@ -43,7 +43,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        //send values to database
 
         final User user = mUsers.get(position);
         holder.username.setText(user.getUser_name());
@@ -57,6 +58,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 Intent intent =new Intent(mContext, MessageActivity.class);
                 intent.putExtra("user_id", user.getUser_id());
                 mContext.startActivity(intent);
